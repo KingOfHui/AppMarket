@@ -2,6 +2,7 @@ package com.google.googleplaystore.factory;
 
 import android.support.v4.app.Fragment;
 
+import com.google.googleplaystore.base.BaseFragment;
 import com.google.googleplaystore.fragment.AppFragment;
 import com.google.googleplaystore.fragment.CategoryFragment;
 import com.google.googleplaystore.fragment.GameFragment;
@@ -9,6 +10,9 @@ import com.google.googleplaystore.fragment.HomeFragment;
 import com.google.googleplaystore.fragment.HotFragment;
 import com.google.googleplaystore.fragment.RecommendFragment;
 import com.google.googleplaystore.fragment.SubjectFragment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by DH on 2017/7/8.
@@ -23,10 +27,15 @@ public class FragmentFactory {
     public static final int FRAGMENT_RECOMMEND = 4;//推荐
     public static final int FRAGMENT_CATEGORY = 5;//分类
     public static final int FRAGMENT_HOT = 6;//排行
+    public static Map<Integer, BaseFragment> fragmentMap=new HashMap<>();
 
     public static Fragment create(int position) {
         //定义Fragment对象
-        Fragment fragment = null;
+        BaseFragment fragment = null;
+        if (fragmentMap.containsKey(position)) {
+            fragment = fragmentMap.get(position);
+            return fragment;
+        }
         switch (position) {
             case FRAGMENT_HOME://返回 首页 对应的fragment
                 fragment = new HomeFragment();
@@ -50,6 +59,7 @@ public class FragmentFactory {
                 fragment = new HotFragment();
                 break;
         }
+        fragmentMap.put(position, fragment);
         return fragment;
     }
 }

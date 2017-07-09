@@ -7,10 +7,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStripExtend;
 import com.google.googleplaystore.adapter.MainVPFragmentAdapter;
+import com.google.googleplaystore.base.BaseFragment;
+import com.google.googleplaystore.base.LoadingPagerController;
+import com.google.googleplaystore.factory.FragmentFactory;
 import com.google.googleplaystore.utils.UIUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,11 +31,40 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mTabs = (PagerSlidingTabStripExtend) findViewById(R.id.main_tabs);
-
-
         initActionBar();
         initActionBarDrawerToggle();
         initViewPager();
+        initListener();
+    }
+
+    private void initListener() {
+
+        final ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                BaseFragment fragment = FragmentFactory.fragmentMap.get(position);
+                LoadingPagerController loadingPager = fragment.getLoadingPager();
+                loadingPager.triggerData();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        };
+        mTabs.setOnPageChangeListener(onPageChangeListener);
+        mViewPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                onPageChangeListener.onPageSelected(0);
+                mViewPager.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
     }
 
     private void initViewPager() {
@@ -40,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mainVPFragmentAdapter.setTitles(titles);
         mViewPager.setAdapter(mainVPFragmentAdapter);
         mTabs.setViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(6);
     }
 
     /**
