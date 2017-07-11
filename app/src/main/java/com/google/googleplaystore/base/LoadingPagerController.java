@@ -6,10 +6,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.googleplaystore.R;
+import com.google.googleplaystore.factory.ThreadPoolProxyFactory;
 import com.google.googleplaystore.utils.UIUtils;
 
 /**
- * Created by DH on 2017/7/9.
+ *  Created by DH on 2017/7/9.
  */
 
 public abstract class LoadingPagerController extends FrameLayout {
@@ -80,7 +81,6 @@ public abstract class LoadingPagerController extends FrameLayout {
                 mSuccessView.setVisibility(GONE);
             }
         }
-//        triggerData();
     }
 
     public void triggerData() {
@@ -91,12 +91,12 @@ public abstract class LoadingPagerController extends FrameLayout {
             state = LOADING_STATE;
             refreshViewByState();
             mLoadDataTask = new LoadDataTask();
-            new Thread(mLoadDataTask).start();
+//            new Thread(mLoadDataTask).start();
+            ThreadPoolProxyFactory.getNormalThreadPoolProxy().submit(mLoadDataTask);
         }
     }
 
-    class LoadDataTask implements Runnable {
-
+    private class LoadDataTask implements Runnable {
         @Override
         public void run() {
             LoadedResult result = initData();
