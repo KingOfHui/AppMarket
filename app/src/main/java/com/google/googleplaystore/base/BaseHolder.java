@@ -3,7 +3,7 @@ package com.google.googleplaystore.base;
 import android.view.View;
 
 /**
- * Created by DH on 2017/7/11.
+ *  Created by DH on 2017/7/11.
  */
 
 public abstract class BaseHolder<T> {
@@ -11,6 +11,7 @@ public abstract class BaseHolder<T> {
     public T mData;
 
     public BaseHolder() {
+//        mData.getClass().getSimpleName();
         mHolderView = initHolderView();
         mHolderView.setTag(this);
     }

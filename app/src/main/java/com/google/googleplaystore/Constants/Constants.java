@@ -12,4 +12,11 @@ public class Constants {
      * LogUtils.LEVEL_OFF : 关闭日志
      */
     public static final int DEBUGLEVEL = LogUtils.LEVEL_ALL;
+    public static final long PROTOCOLTIMEOUT = 5 * 60 * 1000;
+
+    public static class URLS {
+
+        public static final String BASEURL = "http://10.0.2.2:8080/GooglePlayServer/";
+        public static final String IMGURL = BASEURL+"image?name=";
+    }
 }
