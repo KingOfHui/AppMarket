@@ -152,7 +152,6 @@ public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements Adapt
             });
             mLoadMoreTask=null;
         }
-
     }
     /**
      * 是否有加载更多,默认没有.子类可以覆写该方法,可以决定有加载更多

@@ -39,14 +39,13 @@ public class LoadMoreHolder extends BaseHolder<Integer> {
                 mItemLoadmoreContainerRetry.setVisibility(View.VISIBLE);
                 break;
             default :
-
                 break;
         }
     }
 
     @Override
     public View initHolderView() {
-        View holderView = LayoutInflater.from(UIUtils.getContext()).inflate( R.layout.item_loadmore, null);
+        View holderView = LayoutInflater.from(UIUtils.getContext()).inflate( R.layout.item_loadmore, null,false);
         mItemLoadmoreContainerLoading = (LinearLayout) holderView.findViewById(R.id.item_loadmore_container_loading);
         mItemLoadmoreTvRetry = (TextView) holderView.findViewById(R.id.item_loadmore_tv_retry);
         mItemLoadmoreContainerRetry = (LinearLayout) holderView.findViewById(R.id.item_loadmore_container_retry);

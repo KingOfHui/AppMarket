@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
  *  Created by DH on 2017/7/11.
  */
 
-public class HomeHolder extends BaseHolder<HomeBean.ListBean>{
+public class ItemHolder extends BaseHolder<HomeBean.ListBean>{
     private ImageView mItemAppInfoIvIcon;
     private TextView mItemAppInfoTvTitle;
     private RatingBar mItemAppInfoRbStars;

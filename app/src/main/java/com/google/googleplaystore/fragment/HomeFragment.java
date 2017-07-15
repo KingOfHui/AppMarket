@@ -12,7 +12,7 @@ import com.google.googleplaystore.base.BaseHolder;
 import com.google.googleplaystore.base.LoadingPagerController;
 import com.google.googleplaystore.base.SuperBaseAdapter;
 import com.google.googleplaystore.bean.HomeBean;
-import com.google.googleplaystore.holder.HomeHolder;
+import com.google.googleplaystore.holder.ItemHolder;
 import com.google.googleplaystore.holder.HomePictureHolder;
 import com.google.googleplaystore.protocol.HomeProtocol;
 import com.google.googleplaystore.utils.UIUtils;
@@ -63,7 +63,13 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View initSuccessView() {
         ListView listView = new ListView(UIUtils.getContext());
+        //构建轮播图的Holder
         HomePictureHolder homePictureHolder = new HomePictureHolder();
+        //让HomePicturesHolder接收数据,然后进行数据和视图的绑定
+        homePictureHolder.setDataAndRefreshHolderView(mMPictures);
+        //取出HomePicturesHolder所能提供的视图
+        View headerView = homePictureHolder.mHolderView;
+        listView.addHeaderView(headerView);
         listView.setAdapter(new HomeAdapter(mMItemBeans,listView));
         return listView;
     }
@@ -74,7 +80,7 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         public BaseHolder getSpecialBaseHolder() {
-            return new HomeHolder();
+            return new ItemHolder();
         }
 
         @Override

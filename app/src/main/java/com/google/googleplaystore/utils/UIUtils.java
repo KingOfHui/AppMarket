@@ -55,4 +55,28 @@ public class UIUtils {
     public static String getPackageName() {
         return getContext().getPackageName();
     }
+
+    /**
+     * @param dip
+     * @return dip-->px
+     */
+    public static int dip2Px(int dip) {
+        //px/dp=density
+        //取得当前手机px和dp的倍数关系
+        float density = getResources().getDisplayMetrics().density;
+        int px= (int) (dip*density+.5f);
+        return px;
+    }
+
+    /**
+     * @param px
+     * @return px-->dip
+     */
+    public static int px2Dip(int px) {
+        // px/dp=density
+        //取得当前手机px和dp的倍数关系
+        float density = getResources().getDisplayMetrics().density;
+        int dip= (int) (px/density+.5f);
+        return dip;
+    }
 }
