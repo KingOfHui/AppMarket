@@ -1,7 +1,11 @@
 package com.google.googleplaystore.fragment;
 
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.googleplaystore.base.BaseFragment;
 import com.google.googleplaystore.base.BaseHolder;
@@ -9,6 +13,7 @@ import com.google.googleplaystore.base.LoadingPagerController;
 import com.google.googleplaystore.base.SuperBaseAdapter;
 import com.google.googleplaystore.bean.HomeBean;
 import com.google.googleplaystore.holder.HomeHolder;
+import com.google.googleplaystore.holder.HomePictureHolder;
 import com.google.googleplaystore.protocol.HomeProtocol;
 import com.google.googleplaystore.utils.UIUtils;
 
@@ -28,12 +33,13 @@ public class HomeFragment extends BaseFragment {
     private Request mGetRequest;
     private List<HomeBean.ListBean> mMItemBeans;
     private List<String> mMPictures;
+    private HomeProtocol mProtocol;
 
     @Override
     protected LoadingPagerController.LoadedResult initData() {
         try {
-            HomeProtocol homeProtocol = new HomeProtocol();
-            HomeBean homeBean = (HomeBean) homeProtocol.loadData(0);
+            mProtocol = new HomeProtocol();
+            HomeBean homeBean = (HomeBean) mProtocol.loadData(0);
             LoadingPagerController.LoadedResult state = checkResult(homeBean);
                 if (state != LoadingPagerController.LoadedResult.SUCCESS) {
                     return state;
@@ -57,17 +63,38 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View initSuccessView() {
         ListView listView = new ListView(UIUtils.getContext());
-        listView.setAdapter(new HomeAdapter(mMItemBeans));
+        HomePictureHolder homePictureHolder = new HomePictureHolder();
+        listView.setAdapter(new HomeAdapter(mMItemBeans,listView));
         return listView;
     }
     private class HomeAdapter extends SuperBaseAdapter<HomeBean.ListBean>{
-        private HomeAdapter(List<HomeBean.ListBean> datas) {
-            super(datas);
+        private HomeAdapter(List<HomeBean.ListBean> datas, AbsListView absListView) {
+            super(datas,absListView);
         }
 
         @Override
         public BaseHolder getSpecialBaseHolder() {
             return new HomeHolder();
+        }
+
+        @Override
+        public boolean hasLoadMore() {
+            return true;
+        }
+
+        @Override
+        public List onLoadMore() throws Exception {
+            SystemClock.sleep(1000);
+            HomeBean homeBean= (HomeBean) mProtocol.loadData(mMItemBeans.size());
+            if (homeBean != null) {
+                return homeBean.list;
+            }
+            return super.onLoadMore();
+        }
+
+        @Override
+        public void onNormalItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Toast.makeText(getActivity(), "条目被点击了", Toast.LENGTH_SHORT).show();
         }
     }
 }
