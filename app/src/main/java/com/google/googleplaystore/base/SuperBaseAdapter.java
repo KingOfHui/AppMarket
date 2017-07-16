@@ -15,8 +15,8 @@ import java.util.List;
  */
 
 public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements AdapterView.OnItemClickListener {
-    private static final int VIEWTYPE_NORMAL = 0;
-    private static final int VIEWTYPE_LOADMORE = 1;
+    private static final int VIEWTYPE_NORMAL = 1;
+    private static final int VIEWTYPE_LOADMORE = 0;
     private AbsListView mAbsListView;
     private LoadMoreHolder mLoadMoreHolder;
     private LoadMoreTask mLoadMoreTask;
@@ -39,8 +39,13 @@ public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements Adapt
         if (position == getCount() - 1) {
             return VIEWTYPE_LOADMORE;
         }else {
-            return VIEWTYPE_NORMAL;
+//            return VIEWTYPE_NORMAL;
+            return getNormalItemViewType(position);
         }
+    }
+
+    public int getNormalItemViewType(int position) {
+        return VIEWTYPE_NORMAL;
     }
 
     @Override
@@ -57,7 +62,7 @@ public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements Adapt
                 holder = getLoadMoreHolder();
             }else{
                 //创建holder对象
-                holder = getSpecialBaseHolder();
+                holder = getSpecialBaseHolder(position);
             }
         }else {
             holder= (BaseHolder) convertView.getTag();
@@ -171,6 +176,6 @@ public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements Adapt
         return mLoadMoreHolder;
     }
 
-    public abstract BaseHolder getSpecialBaseHolder();
+    public abstract BaseHolder getSpecialBaseHolder(int position);
 
 }
