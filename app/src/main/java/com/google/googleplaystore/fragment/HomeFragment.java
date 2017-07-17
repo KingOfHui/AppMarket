@@ -3,16 +3,12 @@ package com.google.googleplaystore.fragment;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.googleplaystore.base.BaseFragment;
-import com.google.googleplaystore.base.BaseHolder;
+import com.google.googleplaystore.base.ItemAdapter;
 import com.google.googleplaystore.base.LoadingPagerController;
-import com.google.googleplaystore.base.SuperBaseAdapter;
 import com.google.googleplaystore.bean.HomeBean;
-import com.google.googleplaystore.holder.ItemHolder;
 import com.google.googleplaystore.holder.HomePictureHolder;
 import com.google.googleplaystore.protocol.HomeProtocol;
 import com.google.googleplaystore.utils.UIUtils;
@@ -73,19 +69,10 @@ public class HomeFragment extends BaseFragment {
         listView.setAdapter(new HomeAdapter(mMItemBeans,listView));
         return listView;
     }
-    private class HomeAdapter extends SuperBaseAdapter<HomeBean.ListBean>{
-        private HomeAdapter(List<HomeBean.ListBean> datas, AbsListView absListView) {
-            super(datas,absListView);
-        }
+    private class HomeAdapter extends ItemAdapter{
 
-        @Override
-        public BaseHolder getSpecialBaseHolder(int position) {
-            return new ItemHolder();
-        }
-
-        @Override
-        public boolean hasLoadMore() {
-            return true;
+        public HomeAdapter(List<HomeBean.ListBean> datas, AbsListView absListView) {
+            super(datas, absListView);
         }
 
         @Override
@@ -98,9 +85,5 @@ public class HomeFragment extends BaseFragment {
             return super.onLoadMore();
         }
 
-        @Override
-        public void onNormalItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getActivity(), "条目被点击了", Toast.LENGTH_SHORT).show();
-        }
     }
 }

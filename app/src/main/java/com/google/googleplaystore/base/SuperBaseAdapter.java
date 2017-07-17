@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.googleplaystore.factory.ThreadPoolProxyFactory;
 import com.google.googleplaystore.holder.LoadMoreHolder;
@@ -99,6 +100,9 @@ public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements Adapt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (mAbsListView instanceof ListView) {
+            position=position-((ListView)mAbsListView).getHeaderViewsCount();
+        }
         int curViewType = getItemViewType(position);
         if(curViewType==VIEWTYPE_LOADMORE){
             if(mState==LoadMoreHolder.LOADMORE_ERROR){
