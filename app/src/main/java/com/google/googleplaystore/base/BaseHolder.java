@@ -13,7 +13,9 @@ public abstract class BaseHolder<T> {
     public BaseHolder() {
 //        mData.getClass().getSimpleName();
         mHolderView = initHolderView();
-        mHolderView.setTag(this);
+        if(mHolderView!=null) {
+            mHolderView.setTag(this);
+        }
     }
 
     public void setDataAndRefreshHolderView(T data) {

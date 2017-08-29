@@ -1,0 +1,59 @@
+[33mcommit 70b627f57b03fc41562653c51743db017f79dce9[m
+Author: DH <dingh1102@gmail.com>
+Date:   Mon Jul 17 08:56:37 2017 +0800
+
+    排行页面流式布局的完成
+
+[33mcommit 9e367562086f8303d5dd70f8f278ab7e73bc5680[m
+Author: DH <dingh1102@gmail.com>
+Date:   Sun Jul 16 18:31:40 2017 +0800
+
+    推荐页面飞入飞出效果和摇一摇切换
+
+[33mcommit f04c6b4712bdd149fb5f9ec18b02494f8841d182[m
+Author: DH <dingh1102@gmail.com>
+Date:   Sun Jul 16 17:58:47 2017 +0800
+
+    专题,分类页面的实现
+
+[33mcommit 9490986801d8df46dd1961428a43f479f606c776[m
+Author: DH <dingh1102@gmail.com>
+Date:   Sat Jul 15 20:36:47 2017 +0800
+
+    HomeFragment的轮播图,AppFragment和GameFragment两个界面的实现
+
+[33mcommit 0a6e0c89e52e82b3531718772941effea131870a[m
+Author: DH <dingh1102@gmail.com>
+Date:   Sat Jul 15 11:04:17 2017 +0800
+
+    HomeFragment的完成
+
+[33mcommit c2cae1c1b65f00b90e192c390199c1fc79f8a3aa[m
+Author: DH <dingh1102@gmail.com>
+Date:   Fri Jul 14 18:54:22 2017 +0800
+
+    进行网络加载显示数据
+
+[33mcommit 6c2f7cc8662a957031a0f3de01e6439fcb82f6ac[m
+Author: DH <dingh1102@gmail.com>
+Date:   Fri Jul 14 18:50:53 2017 +0800
+
+    进行网络加载显示数据
+
+[33mcommit 3b2f2f663c53354882654270e519806e22d60f00[m
+Author: DH <dingh1102@gmail.com>
+Date:   Tue Jul 11 22:16:24 2017 +0800
+
+    核心Adapter以及Holder的抽取
+
+[33mcommit 2399c2e23cb687ce9ff24c5b31ba445539b1c67b[m
+Author: DH <dingh1102@gmail.com>
+Date:   Sun Jul 9 21:40:20 2017 +0800
+
+    项目框架的搭建
+
+[33mcommit c283a3023041b1e435e56c2cd2e0362265e9f7eb[m
+Author: DH <dingh1102@gmail.com>
+Date:   Sun Jul 9 09:11:59 2017 +0800
+
+    初始化项目

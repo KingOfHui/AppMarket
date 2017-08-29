@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 /**
- * Created by DH on 2017/7/16.
+ *  Created by DH on 2017/7/16.
  */
 
 public class HotProtocol extends BaseProtocol<List<String>> {

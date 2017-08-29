@@ -1,5 +1,6 @@
 package com.google.googleplaystore.protocol;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.googleplaystore.Constants.Constants;
@@ -118,8 +119,7 @@ public abstract class BaseProtocol<T> {
         //2.构建Request
         String url = Constants.URLS.BASEURL + getInterfaceKey();
         //定义参数对应的map
-        Map<String, Object> params = new HashMap<>();
-        params.put("index", index);
+        Map<String, Object> params = getParamsMap(index);
         //拼接参数信息
         String urlParamsByMap = HttpUtils.getUrlParamsByMap(params);
         url = url + "?" + urlParamsByMap;
@@ -136,7 +136,6 @@ public abstract class BaseProtocol<T> {
             Map<String, String> memProtocolCacheMap = application.getMemProtocolCacheMap();
             memProtocolCacheMap.put(generateKey(index), json);
             Log.d("BaseProtocol", "保存网络数据到内存");
-
             Log.d("HomeFragment", "保存数据到磁盘中");
             //保存数据本地
             BufferedWriter writer=null;
@@ -153,12 +152,19 @@ public abstract class BaseProtocol<T> {
         }
     }
 
+    @NonNull
+    public Map<String, Object> getParamsMap(int index) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("index", index);
+        return params;
+    }
+
     /**
      * 生成缓存的唯一的索引的key
      * @param index
      * @return
      */
-    private String generateKey(int index) {
+    public String generateKey(int index) {
 
         return getInterfaceKey()+"."+index;
     }

@@ -1,7 +1,9 @@
 package com.google.googleplaystore.base;
 
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -84,7 +86,12 @@ public abstract class SuperBaseAdapter<T> extends MyBaseAdapter implements Adapt
             Object data = mDatas.get(position);
             holder.setDataAndRefreshHolderView(data);
         }
-        return holder.mHolderView;
+
+        View holderView = holder.mHolderView;
+        holderView.setScaleX(0.6f);
+        holderView.setScaleY(0.5f);
+        ViewCompat.animate(holderView).scaleX(1).scaleY(1).setDuration(400).setInterpolator(new OvershootInterpolator(4)).start();
+        return holderView;
     }
 
     private void triggerLoadMoreData() {
